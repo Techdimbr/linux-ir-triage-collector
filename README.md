@@ -1,107 +1,67 @@
-# 🏛️ Linux Incident Response Triage Collector (`PRJ-TECHDIM-PUBLIC-v1.0.0`)
+# 🔍 Linux Incident Response Triage Collector
+## Coletor Forense Live-Response Volátil em Conformidade com a Norma ISO/IEC 27037 e RFC 3227
 
-<p align="center">
-  <img src="icone.svg" width="80" alt="TECHDIM Logo" />
-</p>
+![Linux Incident Response Triage Collector](06_MIDIA/banner_oficial.png)
 
-<p align="center">
-  <a href="https://www.debian.org"><img src="https://img.shields.io/badge/OS-Debian%2013%20(Trixie%2FSid)-A81D33?style=flat-square&logo=debian&logoColor=white" alt="Debian 13" /></a>
-  <a href="https://www.python.org"><img src="https://img.shields.io/badge/Python-3.11%2B%20(Stdlib)-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python 3.11+" /></a>
-  <a href="04_INTELIGENCIA_DE_DESENVOLVIMENTO/adrs/ADR-0001-arquitetura-atomica.md"><img src="https://img.shields.io/badge/Architecture-Atomic%20Box-0052CC?style=flat-square" alt="Architecture" /></a>
-  <a href="05_VERSOES/git_templates/hooks/pre-commit"><img src="https://img.shields.io/badge/Zero%20Leaks-Verified-2ea44f?style=flat-square&logo=shield" alt="Zero Leaks" /></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow?style=flat-square" alt="License MIT" /></a>
-  <a href="https://cloud.google.com"><img src="https://img.shields.io/badge/Google%20Cloud-Ready-4285F4?style=flat-square&logo=googlecloud&logoColor=white" alt="Google Cloud Ready" /></a>
-  <a href="https://techdimbr.github.io/techdimbr/"><img src="https://img.shields.io/badge/GitHub%20Pages-Live%20Showcase-0969DA?style=flat-square&logo=github&logoColor=white" alt="GitHub Pages" /></a>
-</p>
+[![Padrão](https://img.shields.io/badge/Padr%C3%A3o-PRJ--TECHDIM--PUBLIC--v1.0.0-00E5FF.svg)](https://techdimbr.github.io/techdimbr/)
+[![Doutrina](https://img.shields.io/badge/Doutrina-KETHER__1-7C4DFF.svg)](https://www.techdim.com.br)
+[![Norma](https://img.shields.io/badge/Forense-ISO%2FIEC%2027037%20Compliant-red.svg)](https://www.iso.org/standard/44381.html)
+[![Volatilidade](https://img.shields.io/badge/Ordem-RFC%203227%20Order%20of%20Volatility-blue.svg)](https://datatracker.ietf.org/doc/html/rfc3227)
+[![Stack](https://img.shields.io/badge/Script-Bash%20Nativo%20POSIX-black.svg)](README.md)
+[![Cadeia](https://img.shields.io/badge/Cust%C3%B3dia-SHA--256%20Tamper--Evident-brightgreen.svg)](README.md)
+[![Licença](https://img.shields.io/badge/Licen%C3%A7a-MIT%20Corporate-green.svg)](LICENSE)
 
-<p align="center">
-  <img src="06_MIDIA/banner_oficial.png" width="100%" alt="TECHDIM Banner" />
-</p>
-
-> **Propriedade:** TECHDIM INOVA SIMPLES (I.S.) · CNPJ: 61.933.926/0001-24  
-> **Doutrina:** Kether_1 · Central de Engenharia, Ciberdefesa e Governança Soberana  
-> **Identificador Canônico:** `PRJ-TECHDIM-PUBLIC-v1.0.0`
+> **Ferramenta de resposta a incidentes para coleta rápida e forense de evidências voláteis em servidores Linux comprometidos. Respeito absoluto à ordem de volatilidade da RFC 3227, zero modificação do sistema alvo e geração imediata de manifesto criptográfico SHA-256 para validade jurídica.**
 
 ---
 
-## 🇧🇷 Visão Geral (Português)
+## 🏛️ Visão Geral & Proposta de Valor
 
-O **Padrão Canônico TECHDIM GitHub Público** é o template de arquitetura corporativa para desenvolvimento open-source e B2B da TECHDIM. Ele estrutura sistemas como uma **Caixa-Preta Atômica** (organismo autocontido, offline-first e determinístico), garantindo que qualquer desenvolvedor ou auditor possa clonar, verificar a integridade matemática e executar a aplicação instantaneamente.
+Durante um incidente de segurança (ransomware, invasão de shell reversa ou mineração não autorizada), a primeira reação errônea comum é reiniciar o servidor ou instalar ferramentas pesadas de diagnóstico que sobrescrevem a memória RAM e destroem metadados vitais de inodes.
 
-### Destaques da Engenharia
-- **Filosofia de Caixa-Preta Atômica:** Ciclo de vida previsível em 7 diretórios numéricos canônicos (`00` a `06`).
-- **Prova Matemática de Integridade (AIDE/Tripwire):** Verificação SHA-256 nativa de scripts e manifestos via `00_AUDITORIA/verificar_integridade.sh`.
-- **Barreira Zero Leaks:** Hook pré-commit nativo que bloqueia envio acidental de arquivos `.env`, chaves privadas e tokens de nuvem.
-- **Prontidão Nativa para Agentes de IA:** Diretrizes universais em `AGENTS.md`, `GEMINI.md`, `CLAUDE.md` e `.agents/skills/`.
-- **Bootstrap Inteligente:** Inicialização instantânea (< 1s) para módulos em Python puro (stdlib) e isolamento automático em `.venv` quando dependências externas forem requeridas.
+O **Linux Incident Response Triage Collector** executa o protocolo forense correto:
+1. **Preservação da Ordem de Volatilidade (RFC 3227):** Coleta conexões ativas (`ss -tulpn`), tabela ARP/vizinhos (`ip neigh`), processos detalhados com árvore PID (`ps auxf`), descritores de arquivos abertos (`lsof`) e módulos de kernel carregados antes que o invasor limpe os vestígios.
+2. **Zero Poluição de Evidências:** Escrito em Bash nativo estrito (POSIX), utilizando os próprios binários estáticos ou ferramentas nativas do sistema sem compilar nem instalar pacotes que alterem o estado do disco.
+3. **Cadeia de Custódia Inviolável (ISO/IEC 27037):** Cada arquivo de saída recebe timestamp militar UTC e tem seu hash SHA-256 calculado imediatamente, selado em um manifesto final assinado.
 
 ---
 
-## 🇺🇸 Executive Summary (English)
+## 🏗️ Protocolo de Resposta Forense
 
-The **TECHDIM Canonical Standard for Public GitHub Repositories** is an enterprise-grade architectural blueprint designed to build software as an **Atomic Black Box** (self-contained, offline-first, and deterministic). Engineered for mission-critical reliability, it enforces a strict 7-tier decimal directory lifecycle (`00` through `06`) with native mathematical integrity checks and multi-agent AI orchestration.
-
----
-
-## 📐 Arquitetura Canônica / Directory Architecture
-
-```text
-linux-ir-triage-collector/
-├── 00_AUDITORIA/                       # Rastreabilidade, checksums.sha256 e verificação AIDE
-├── 01_SOBRE_O_PROJETO/                 # Visão de negócio, dores resolvidas e diagramas
-├── 02_COMO_USAR/                       # Guias de instalação, manuais e scripts operacionais
-├── 03_APLICACAO/                       # Código-fonte executável (src/), testes (tests/) e assets
-├── 04_INTELIGENCIA_DE_DESENVOLVIMENTO/ # ADRs (Architecture Decision Records) e referências
-├── 05_VERSOES/                         # Histórico de releases, CHANGELOG e git templates/hooks
-├── 06_MIDIA/                           # Ativos visuais essenciais (banner_oficial.png)
-│
-├── .agents/skills/                     # Skills embutidas para agentes de IA
-├── .github/workflows/                  # CI/CD (testes automatizados e auditoria de segurança)
-├── .env.example                        # Template seguro de variáveis de ambiente
-├── project.json                        # Manifesto estruturado de metadados corporativos
-├── LEIA-ME.md                          # Manual técnico operacional (Uso Interno)
-├── README.md                           # Vitrine pública executiva bilíngue (GitHub)
-├── iniciar.sh / INICIAR.bat            # Lançadores multiplataforma com bootstrap automático
-└── LICENSE                             # Licença MIT aberta com termos institucionais
+```mermaid
+graph TD
+    Alert["🚨 Alerta de Intrusão / Servidor Comprometido"] -->|1. Isolamento Lógico da Rede| Isolate["Isolar Interface (sem reiniciar o host)"]
+    Isolate -->|2. Iniciar Coletor Forense| Triage["triage_collector.sh (Bash Nativo)"]
+    Triage -->|3. Coleta Volátil RFC 3227| Sockets["Conexões & Sockets (ss)"]
+    Triage --> Processes["Árvore de Processos (ps/procfs)"]
+    Triage --> Network["Rotas & Cache ARP (ip)"]
+    Triage --> Files["Arquivos Deletados Abertos (lsof)"]
+    Sockets & Processes & Network & Files --> Hashing["4. Hashing Criptográfico Imediato (SHA-256)"]
+    Hashing --> Archive["Pacote Tar Gzip Selado + Manifesto de Custódia"]
+    Archive --> Expert["Perito Forense / Análise de Causa Raiz"]
 ```
 
 ---
 
-## 🚀 Como Executar / Quick Start
+## ⚡ Início Rápido
 
+### Execução da Coleta Forense
 ```bash
-# 1. Clonar o repositório
-git clone https://github.com/Techdimbr/<nome-do-repositorio>.git
-cd <nome-do-repositorio>
+# 1. Clonar ou transferir o repositório para o host alvo
+git clone https://github.com/Techdimbr/linux-ir-triage-collector.git
+cd linux-ir-triage-collector
 
-# 2. Verificar a integridade matemática dos arquivos críticos (AIDE/SHA-256)
-./00_AUDITORIA/verificar_integridade.sh
-
-# 3. Inicializar a aplicação (bootstrap inteligente automático)
+# 2. Inicializar o ambiente local
 ./iniciar.sh
+
+# 3. Executar o coletor de triagem (requer permissão de root para ler sockets e /proc)
+sudo 03_APLICACAO/src/triage_collector.sh --output-dir /tmp/triage_output
 ```
 
 ---
 
-## 🛡️ Segurança e Governança
-
-- **Verificação de Integridade:** Execute `./00_AUDITORIA/verificar_integridade.sh` para auditoria matemática via SHA-256.
-- **Zero Leaks:** Nunca versione o arquivo `.env`. Copie `.env.example` para `.env` e configure suas variáveis locais.
-- **Git Hooks:** Ative a barreira pré-commit executando `./05_VERSOES/git_templates/configurar_git.sh`.
-
----
-
-## 💼 Implantação Corporativa & Parcerias Estratégicas
-
-A **TECHDIM Inova Simples** fornece blueprints de código aberto e atua na implantação de arquiteturas avançadas de ciberdefesa, nuvem soberana e governança corporativa:
-
-- 🛡️ **Hardening & Ciberdefesa:** Blindagem de servidores Linux Debian, regras avançadas de nftables e contenção de endpoints.
-- ☁️ **Arquitetura Google Cloud (GCP):** Landing Zones soberanas, conectividade privada (VPC/IAP), Cloud Armor e CMEK.
-- 🤖 **IA Privada & RAG Corporativo:** Sistemas corporativos com Vertex AI e Gemini sem vazamento de dados confidenciais.
-- ⚖️ **Governança LGPD:** Auditorias automatizadas de bancos de dados, varredura de PII e emissão de relatórios de conformidade.
-
-### Contato Comercial & Canais Oficiais
-- 🌐 **Website Oficial:** [https://www.techdim.com.br](https://www.techdim.com.br)
-- 🚀 **Vitrine Interativa (GitHub Pages):** [https://techdimbr.github.io/techdimbr/](https://techdimbr.github.io/techdimbr/)
-- 📩 **Atendimento Corporativo:** `contato@techdim.com.br` / `reparafacilcampinas@gmail.com`
-- 🏢 **CNPJ:** `61.933.926/0001-24` — TECHDIM INOVA SIMPLES (I.S.) · Campinas/SP
+## 🛡️ Governança & Contato Corporativo
+- **Autor:** Deivis Írio Mayer (Kether_1)
+- **Entidade:** TECHDIM INOVA SIMPLES (I.S.) - ME · CNPJ 61.933.926/0001-24
+- **Website Oficial:** [https://www.techdim.com.br](https://www.techdim.com.br)
+- **Portal de Soluções:** [https://techdimbr.github.io/techdimbr/](https://techdimbr.github.io/techdimbr/)
